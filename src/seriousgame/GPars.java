@@ -15,7 +15,7 @@ public class GPars {
      /**  Dopuszczalny czas gry   */
     public static long GAME_TIME=Long.MAX_VALUE;
     /**  Liczba poziomów gry   */
-    public final static long NO_LEVELS=6;
+    public final static long NO_LEVELS=100;
     /**  Obraz t³a */
     public static Image bgImage;
     /**  Obraz ikony Menu   */

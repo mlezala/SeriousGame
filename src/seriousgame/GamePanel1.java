@@ -292,7 +292,8 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
                           if((fElement[i].color != flask.elem2.getColor())&&(fElement[i].color != flask.elem1.getColor()))
                           {
                               gStatus.lifes--; 
-                              playSound(new File("sounds/error.wav"));
+                              
+                              FlyingElements.playSound(new File("sounds/error.wav"));
                           }
                               fElement[i].setGrasp();
                              
@@ -328,18 +329,4 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
     }//koniec restartGame()
     
       
-       public static synchronized void playSound(final File f) {
-        new Thread(new Runnable() {
-          public void run() {
-            try {
-              Clip clip = AudioSystem.getClip();
-              AudioInputStream inputStream = AudioSystem.getAudioInputStream(f);
-              clip.open(inputStream);
-              clip.start(); 
-            } catch (Exception e) {
-              System.err.println(e.getMessage());
-            }
-          }
-        }).start();
-    }//playSound()
 }

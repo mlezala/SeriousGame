@@ -28,7 +28,13 @@ public class InstructionPanel extends JPanel{
         GPars.loadInitialImages();
         setLayout(null);
         
-        instruction = new JTextArea("Gra ma na celu pomoc w przyswojeniu podstawowych nazw oraz składu związków chemicznych");
+        instruction = new JTextArea("   Gra ALCHEMIA ma na celu pomoc w przyswojeniu podstawowych nazw oraz\n      składu związków chemicznych. Aby rozpocząć "
+                + "grę wciśnij przycisk MENU,\na następnie wybierz opcję NOWA GRA. Na dole planszy zostanie wygenerowana\n        kolba miarowa z nazwą związku "
+                + "chemicznego. Poruszaj kolbą za pomocą\n   strzałek PRAWO/LEWO, w celu złapania odowiednich symboli pierwiastków\n              chemicznych wchodzących "
+                + "w skład podanego na kolbie związku.\n Złapanie wszystkich pierwiastków wchodzących w skład związku chemicznego\n     pozwoli Ci na przejscie "
+                + "do nowego poziomu. Każdy błąd powoduje utratę\n jednogo z trzech wirtualnych żyć. Po utracie wszystkich żyć gra zakańcza się,\n   a Ty "
+                + "mozesz zacząć przygodę z chemią od nowa! Gdybyś w trakcie rozgrywki\n   chciał powrócić do instrukcji lub przerwać, bądź zakończyć grę "
+                + "kliknij przycik\n                          MENU i wybierz odpowiednią opcją. MIŁEJ ZABAWY!");
         instruction.setBounds(170,100,700,300);
         instruction.setFont(new Font("Comis Sans", Font.BOLD, 18));
         instruction.setForeground(new Color(63,72, 204));
