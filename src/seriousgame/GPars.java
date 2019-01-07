@@ -41,7 +41,7 @@ public class GPars {
     /** Zmienna pomocnicza okreœlaj¹ca status ukoñczenia gry */
     public static boolean end=false;
     /** Zmienna pomocnicza okreœlaj¹ca maksymaln¹ liczê obiektów pierwszego planu */
-    public static int noOfObjects=16;
+    public static int noOfObjects=18;
     /** Szerokoœæ pola graficznego gry */
     public static int gWidth=1024;
     /** Wysokoœæ pola graficznego gry */
@@ -65,7 +65,7 @@ public class GPars {
     public static void loadInitialImages() {
         
         kolba = loadImage("images/kolba.png");
-        instructionBackground = loadImage("images/t³o.jpg");
+        instructionBackground = loadImage("images/tlo.jpg");
         menuBackground = loadImage("images/background0.png");
         menuLogo = new ImageIcon ("images/MENU.png");
         bgImage = loadImage("images/tloo.png");
@@ -96,11 +96,11 @@ public class GPars {
         flasks= new Image[7];
         flasks[0]=loadImage("images/CaO.png");
         flasks[1]=loadImage("images/MgS.png");
-        flasks[2]=loadImage("images/BrI.png");
+        flasks[2]=loadImage("images/KI.png");
         flasks[3]=loadImage("images/KCl.png");
         flasks[4]=loadImage("images/Zn0.png");
         flasks[5]=loadImage("images/LiF.png");
-        flasks[5]=loadImage("images/CaS.png");
+        flasks[6]=loadImage("images/LiF.png");
     }//koniec loadInitialImages()
     
     /**

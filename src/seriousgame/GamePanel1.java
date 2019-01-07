@@ -52,8 +52,8 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         add(menu);
         
         
-        objectsInLine=4;
-        shiftBL=768/(GPars.noOfObjects/objectsInLine);
+        objectsInLine=1;
+        shiftBL=768/(GPars.noOfObjects/3);
         fElement=new FlyingElements[GPars.noOfObjects];
         flask=new Flasks(GPars.flasks);
         restartGame();
@@ -71,12 +71,13 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         g.setColor(new Color(48,213,200));
         g.fillRect(0, 0, 1024, 70);
          //Ustaw kolor domyślny
-        g.setColor(Color.white);
+        g.setColor(Color.RED);
         //Ustaw czcionki do wypełnienia paska Menu
         g.setFont(menuFont);
         g.drawString("POZIOM:"+gStatus.level,1024-700, 768-720);
         //g.drawString(""+,1024-540, 768-720);
         g.drawString("PUNKTY:"+gStatus.points,1024-450, 768-720);
+        g.drawString("ŻYCIA:"+gStatus.lifes ,1024-450, 600);
         //narysuj ikonę z logo
         g.drawImage(GPars.logoImage,1024-1000,768-760,null);
         //narysuj kolbe  
@@ -91,10 +92,23 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
                 g.drawString("GRATULACJE!",370,250);
                 g.drawString("PREJDŹ DO KOLEJNEGO POZIOMU.",200,350);
                 repaint();
-                requestFocus();
-               
-               
-                
+                requestFocus();                                             
+                //DecimalFormat df = new DecimalFormat("#.##");
+                //g.drawString("WYGRANA:"+df.format(GPars.levelTime)+"s",150, 976/2);
+                //g.setColor(Color.white);
+                //g.setFont(menuFont);
+            }
+            if(gStatus.lifes<=0){
+                if(!GPars.levelPause){
+                    long stopTime = System.currentTimeMillis();
+                    GPars.levelTime=(stopTime-GPars.startTime)/1000.0;
+                    GPars.levelPause=true;
+                }
+                g.setColor(Color.BLUE);
+                g.drawString("STRACIŁEŚ WSZYSTKIE ŻYCIA!",370,250);
+                g.drawString("MUSISZ POĆWICZYĆ",200,350);
+                repaint();
+                requestFocus();                                             
                 //DecimalFormat df = new DecimalFormat("#.##");
                 //g.drawString("WYGRANA:"+df.format(GPars.levelTime)+"s",150, 976/2);
                 //g.setColor(Color.white);
@@ -102,7 +116,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
             }
         //Na tle obiektu pierwszego planu
         for(int i=0;i< 6;i++){
-            if(gStatus.points<2)
+            if(gStatus.points<2 && gStatus.lifes>0 )
             g.drawImage(flask.icon, (int)x, (int)y, null);
           
            
@@ -111,7 +125,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         
          //Na tle obiektu pierwszego planu
         for(int i=0;i<fElement.length;i++){
-            if(gStatus.points<2){
+            if(gStatus.points<2 && gStatus.lifes>0){
             fElement[i].calculatePathPos(GPars.MoveMODE);
             if(!fElement[i].grasp)
                 g.drawImage(fElement[i].icon,fElement[i].currX+50,fElement[i].currY+80,(int)(fElement[i].icon.getWidth(null)), (int)(fElement[i].icon.getHeight(null)),null);
@@ -271,14 +285,20 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
                           }
                           if(!fElement[i].grasp){
                               fElement[i].setGrasp();
-                           
+                             
                           }
+                          if(!fElement[i].grasp && (fElement[i].color != flask.elem2.getColor())&&(fElement[i].color != flask.elem1.getColor()))
+                          {
+                              gStatus.lifes--; 
+                          }
+                           
                       }
                   }
       }
       
       public void restartGame(){
         gStatus.resetPoints();
+        gStatus.resetLifes();
         GPars.startTime=System.currentTimeMillis();
         GPars.pause=false;
         int offset=768/objectsInLine; 
@@ -286,7 +306,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         int yLine=0;
         for(int i=0; i<GPars.noOfObjects;i++){
          
-            fElement[i]=new FlyingElements((((inLine%objectsInLine)+1)*offset)-GPars.elements[(i%GPars.elements.length)].getWidth(null),0,GPars.elements);
+            fElement[i]=new FlyingElements((((inLine%objectsInLine)+1)*offset)-GPars.elements[(i%GPars.elements.length)].getWidth(null),0 ,GPars.elements);
             fElement[i].setScreenSize(1024, 768);
             flask = new Flasks (GPars.flasks);
             if(inLine>=objectsInLine){
@@ -295,6 +315,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
             }
             inLine++;
             fElement[i].setYPos(yLine*shiftBL*-1);
+           
         }//koniec for i
         
     }//koniec restartGame()

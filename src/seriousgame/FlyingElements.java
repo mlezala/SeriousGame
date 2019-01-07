@@ -3,6 +3,7 @@ package seriousgame;
 import java.awt.Image;
 import java.awt.Point;
 import java.io.File;
+import java.util.Random;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -42,7 +43,11 @@ public class FlyingElements {
      * @param y początkowa współrzędna y
      */
     public FlyingElements(int x, int y, Image[] images){
-        this.x=x;
+        
+        // losowanie wspolrzednej x spadajacego pierwiastka
+        Random rand = new Random();
+        this.x = rand.nextInt(800);
+        //this.x=x;
         this.y=y;
         currX=x;
         currY=y;
@@ -100,6 +105,7 @@ public class FlyingElements {
         currY=cY;
     }//setYPos()
     
+  
     /**
      * Pobierz pozycję pierwiastka
      * @return pozycja pierwiastka

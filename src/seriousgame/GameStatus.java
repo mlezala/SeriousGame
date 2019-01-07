@@ -16,6 +16,7 @@ public class GameStatus {
     public int level;
     /** Czas gry na danym poziomie*/   
     public double time;
+    public int lifes ;
     
     /**
      * Zeruj parametry gry
@@ -24,6 +25,7 @@ public class GameStatus {
         points=0;
         level=1;
         time=0.0;
+        lifes =3;
     }//reset()
     /**
      * Zeruj licznę punktów
@@ -37,4 +39,8 @@ public class GameStatus {
     public void nextLevel(){
         level++;
     }//nextLevel()
+    
+      public void resetLifes(){
+        lifes=3;
+    }
 }
