@@ -11,10 +11,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Magda
- */
 public class Window extends JFrame{
     
     MenuPanel menu = new MenuPanel();
@@ -30,7 +26,7 @@ public class Window extends JFrame{
     setLocation(x,y);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setResizable(false); //zablokuj możliwość zmian rozmiaru okna
-    setUndecorated(false); //ukryj ramkę okna i przyciski kontrolne
+    setUndecorated(true); //ukryj ramkę okna i przyciski kontrolne
     setVisible(true);
     
     panels();  
@@ -146,10 +142,6 @@ public class Window extends JFrame{
         setCursor(tCursor);
     }
     
-    /**
-     * Główna pętla gry - takt animacji (w procesie dalszej edukacji
-     * można używać wątków czy klasy Timer)
-     */
     private void animationLoop() {
         //pobierz liczbę milisekund od daty referencyjnej (w ms) 
         GPars.startTime = System.currentTimeMillis();

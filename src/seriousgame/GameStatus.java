@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package seriousgame;
 
-/**
- *
- * @author Magda
- */
 public class GameStatus {
     /** Liczba zgromadzonych punktów na danynm poziomie*/
     public int points;
@@ -18,29 +10,26 @@ public class GameStatus {
     public double time;
     public int lifes ;
     
-    /**
-     * Zeruj parametry gry
-     */
+   //ustaw parametru początkowe
     public void reset(){
         points=0;
         level=1;
         time=0.0;
         lifes =3;
-    }//reset()
-    /**
-     * Zeruj licznę punktów
-     */
+    }
+    
+    //zeruj liczbę punktów
     public void resetPoints(){
         points=0;
-    }//resetPoints()
-    /**
-     * Zwiększ wskaźnik poziomu
-     */
+    }
+    
+    //zwiększ poziom
     public void nextLevel(){
         level++;
-    }//nextLevel()
+    }
     
-      public void resetLifes(){
+    //resetuj liczbę żyć 
+    public void resetLifes(){
         lifes=3;
     }
 }

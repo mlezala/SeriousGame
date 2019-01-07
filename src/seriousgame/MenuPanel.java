@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package seriousgame;
 
 import java.awt.BorderLayout;
@@ -15,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 
 public class MenuPanel extends JPanel{
     
@@ -40,17 +35,15 @@ public class MenuPanel extends JPanel{
         endGame.setBounds(300,400,420,80);
         endGame.setFont(new Font("Comis Sans", Font.BOLD, 30));
         endGame.setForeground(new Color(63,72, 204));
-                    
-       
+                         
         add(newGame);
         add(endGame);
         add(instruction); 
     }
-            
-     
+               
  protected void paintComponent(Graphics gs){
         Graphics2D g=(Graphics2D)gs;
-        //Ustaw tryb lepszej jakości grafiki (wygładzanie/antyaliasing)
+        //Ustaw tryb lepszej jakości grafiki ]
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // Narysuj tło
         g.drawImage(GPars.menuBackground, 0, 0, null);

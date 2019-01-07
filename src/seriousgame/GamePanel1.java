@@ -53,40 +53,34 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         menu = new JButton();
         menu.setIcon(GPars.menuLogo);
         menu.setBounds(870,10,132,60);
-        
         add(menu);
-        
         
         objectsInLine=1;
         shiftBL=768/(GPars.noOfObjects/3);
         fElement=new FlyingElements[GPars.noOfObjects];
         flask=new Flasks(GPars.flasks);
+        
         restartGame();
-        
-        
     }
     
     public void paintComponent(Graphics gs){
-         Graphics2D g=(Graphics2D)gs;
-        //Ustaw tryb lepszej jakości grafiki (wygładzanie/antyaliasing)
+        Graphics2D g=(Graphics2D)gs;
+        //Ustaw tryb lepszej jakości grafiki
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // Narysuj tło
         g.drawImage(GPars.bgImage, 0, 0, null);
         //narysuj pasek
         g.setColor(new Color(48,213,200));
         g.fillRect(0, 0, 1024, 70);
-         //Ustaw kolor domyślny
+        //Ustaw kolor domyślny czcionki
         g.setColor(Color.WHITE);
         //Ustaw czcionki do wypełnienia paska Menu
         g.setFont(menuFont);
         g.drawString("POZIOM:"+gStatus.level,1024-700, 768-720);
-        //g.drawString(""+,1024-540, 768-720);
-        //g.drawString("PUNKTY:"+gStatus.points,1024-450, 768-720);
         g.drawString("ŻYCIA:"+gStatus.lifes ,1024-450, 768-720);
         //narysuj ikonę z logo
         g.drawImage(GPars.logoImage,1024-1000,768-760,null);
-        //narysuj kolbe  
-       // g.drawImage(GPars.kolba, (int)x, (int)y, null);
+        
             if(gStatus.points>=2){
                 if(!GPars.levelPause){
                     long stopTime = System.currentTimeMillis();
@@ -116,54 +110,40 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
                 g.drawString("LUB ROZPOCZĘCIA NOWEJ GRY.",230,550);
                 repaint();
                 requestFocus();                                             
-                //DecimalFormat df = new DecimalFormat("#.##");
-                //g.drawString("WYGRANA:"+df.format(GPars.levelTime)+"s",150, 976/2);
-                //g.setColor(Color.white);
-                //g.setFont(menuFont);
             }
-        //Na tle obiektu pierwszego planu
+            
+        //Narysuj kolbę
         for(int i=0;i< 6;i++){
             if(gStatus.points<2 && gStatus.lifes>0 )
-            g.drawImage(flask.icon, (int)x, (int)y, null);
-          
-           
+            g.drawImage(flask.icon, (int)x, (int)y, null);  
         }
-        
-        
-         //Na tle obiektu pierwszego planu
+       
+        //Narysuj pierwiastki
         for(int i=0;i<fElement.length;i++){
             if(gStatus.points<2 && gStatus.lifes>0){
             fElement[i].calculatePathPos(GPars.MoveMODE);
             if(!fElement[i].grasp)
                 g.drawImage(fElement[i].icon,fElement[i].currX+50,fElement[i].currY+80,(int)(fElement[i].icon.getWidth(null)), (int)(fElement[i].icon.getHeight(null)),null);
         }}
-//        for(int i=0;i<fElement.length;i++){
-//            if(gStatus.points<2){
-//            fElement[i].calculatePathPos(GPars.MoveMODE);
-//            if(!fElement[i].grasp)
-//                g.drawImage(fElement[i].icon,fElement[i].currX+50,fElement[i].currY+80,(int)(fElement[i].icon.getWidth(null)), (int)(fElement[i].icon.getHeight(null)),null);
-//        
-    
-     
+
+     //dodanie obłsługi myszki
      addMouseListener(new MouseAdapter(){
             @Override
           public void mouseClicked(MouseEvent me){
              
-              //czy wybrano rozpoczęcie nowego poziomu lub nowej gry
+              //przejście do następnego poziomu
               if(me.getX()>200 && me.getX()<810 && me.getY()>310 && me.getY()<350 && gStatus.points>=2){
-                  //Nowa gra
-                  
                  restartGame(); 
                  gStatus.level++;
               }
-            
-   
-          }//koniec mouseClicked()
+          }
       });
+     
+     //sprawdź czy złapane elementy są prawidłowe i reaguj odpowiednio
      isGoodCaught((int) x+80, 510);
     }
     
-    
+    //obluga klawiatury - strzełki PRAWO/LEWO
     @Override
     public void actionPerformed(ActionEvent e){
         repaint();
@@ -181,17 +161,6 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         }
     }
     
-    /*public void up(){
-        vely = -1.5;
-        velx = 0;
-    }*/
-    
-    /*public void down(){
-        vely = 1.5;
-        velx = 0;
-    }*/
-
-    
      public void left(){
         vely = 0;
         velx = -1.5;
@@ -201,15 +170,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         vely = 0;
         velx =1.5;
     }
-      
-    /*public void upSTOP(){
-        vely=0;
-    }*/
-    
-     /*public void downSTOP(){
-        vely=0;
-    } */       
-
+   
     public void leftSTOP(){
         velx=0;
     }  
@@ -220,12 +181,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
       
       public void keyPressed(KeyEvent e){
           int code = e.getKeyCode();
-         /* if(code == KeyEvent.VK_UP){
-              up();
-          }*/
-         /* if(code == KeyEvent.VK_DOWN){
-              down();
-          }*/
+          
           if(code == KeyEvent.VK_LEFT){
               left();
               
@@ -235,34 +191,21 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
           }
       }
       
-      
       public void keyTyped(KeyEvent e){}
       public void keyReleased(KeyEvent e){
       int code = e.getKeyCode();
-      /*if (code == KeyEvent .VK_UP){
-          upSTOP();
-      }
-       if (code == KeyEvent .VK_DOWN){
-          downSTOP();
-      }*/
        if (code == KeyEvent .VK_LEFT){
           leftSTOP();
-      }
+        }
        if (code == KeyEvent .VK_RIGHT){
           rightSTOP();
+        }
       }
-      }
-      
-      
-    
-      
 
-    
-      //flask.color== 0 - jaka kolba
       public void isGoodCaught(int x, int y)
       {
           for(int i=0;i<fElement.length;i++){
-                      //tlenek wapnia 
+                      //sprawdź czy pierwiastek został złpany
                       if(fElement[i].containsPoint(x,y)){                      
                           if(!fElement[i].grasp && (fElement[i].color == flask.elem1.getColor())){
                               if(flask.elem1.grasped == false){
@@ -277,21 +220,19 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
                               }                             
                           }
                           if(!fElement[i].grasp){
+                          //jeśli złpany pierwiastek nie jest prawidłowy odejmij życie i odtwórz dźwięk
                           if((fElement[i].color != flask.elem2.getColor())&&(fElement[i].color != flask.elem1.getColor()))
                           {
                               gStatus.lifes--; 
-                              
                               FlyingElements.playSound(new File("sounds/error.wav"));
                           }
+                              //wywołaj znikanie pierwiasrka po złapaniu
                               fElement[i].setGrasp();
-                             
                           }
-                         
-                           
                       }
                   }
       }
-      
+     
       public void restartGame(){
         gStatus.resetPoints();
         gStatus.resetLifes();
@@ -312,9 +253,6 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
             inLine++;
             fElement[i].setYPos(yLine*shiftBL*-1);
            
-        }//koniec for i
-        
-    }//koniec restartGame()
-    
-      
+        } 
+    }  
 }

@@ -47,10 +47,10 @@ public class MenuPanelDuringGame extends JPanel{
         add(instruction);
         add(continueGame); 
     }
-                
+               
     protected void paintComponent(Graphics gs){
         Graphics2D g=(Graphics2D)gs;
-        //Ustaw tryb lepszej jakości grafiki (wygładzanie/antyaliasing)
+        //Ustaw tryb lepszej jakości grafiki
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // Narysuj tło
         g.drawImage(GPars.menuBackground, 0, 0, null);

@@ -7,10 +7,7 @@ import java.util.Random;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-/**
- *
- * @author Magda
- */
+
 public class FlyingElements {
     /** Początkowa współrzędna x obiektu */
     public int x;
@@ -34,20 +31,14 @@ public class FlyingElements {
     public int sHeight;   
     /** Czy element złapany */
     public boolean grasp; 
-    /** Ikona obiektu - pierwiastku*/
+    /** Ikona obiektu - pierwiastka*/
     public Image icon;
     
-    /**
-     * Konstruktor - ustawienie parametrów obiektu, wylosowanie koloru balonu
-     * @param x początkowa współrzędna x
-     * @param y początkowa współrzędna y
-     */
     public FlyingElements(int x, int y, Image[] images){
         
-        // losowanie wspolrzednej x spadajacego pierwiastka
+        // losuj wspolrzedną x, w której pojawi się spadajacy pierwiastek
         Random rand = new Random();
         this.x = rand.nextInt(800);
-        //this.x=x;
         this.y=y;
         currX=x;
         currY=y;
@@ -57,19 +48,15 @@ public class FlyingElements {
         grasp=false;
         
        
-         //losujemy symbol pierwiastka
+        //losuj symbol pierwiastka
         color=(int)Math.round(Math.random()*(images.length-1));
         icon=images[color];
         
         width=icon.getWidth(null);
-        height=icon.getHeight(null);
-
-
-        
+        height=icon.getHeight(null); 
     }
-    /**
-     * Pierwiastek złapany - ustaw stan i odtwórz dźwięk
-     */
+    
+    //pierwiastek złapany - ustaw stan i odtwórz dźwięk
     public void setGrasp(){
         if(!grasp){
             grasp=true;
@@ -77,46 +64,30 @@ public class FlyingElements {
         }
     }
     
-    /**
-     * Ustaw pozycję pierwiastka
-     * @param cX współrzędna x
-     * @param cY współrzędna y
-     */
+    //ustaw pozycję pierwiastka
     public void setPosition(int cX, int cY){
         currX=cX;
         currY=cY;
     }
     
-    /**
-     * Ustaw rozmiar pola graficznego 
-     * @param gWidth szerokość
-     * @param gHeight wysokość
-     */
+    //ustaw rozmiar pola graficznego
     public void setScreenSize(int gWidth, int gHeight){
         sWidth=gWidth;
         sHeight=gHeight;
     }
     
-    /**
-     * Ustaw pozycję y obiektu
-     * @param cY 
-     */
+    //ustaw pozycję Y
     public void setYPos(int cY){
         currY=cY;
     }//setYPos()
     
   
-    /**
-     * Pobierz pozycję pierwiastka
-     * @return pozycja pierwiastka
-     */
+    //pobierz pozycję pierwiastka
     public Point getPosition(){
         return new Point(currX,currY);
     }
  
-    /**
-     * Metoda obliczania pozycji elementu - symulacja ruchu
-     */
+    //oblicz położenie pierwiastka
     public void calculatePathPos(int mode){
         int tmpX=0;
         switch(mode){
@@ -131,16 +102,9 @@ public class FlyingElements {
            
             default: break;    
         }
-        
-    }//calculatePathPos()
-    
-    /**
-     * Funkcja określająca czy określone współrzędne 
-     * są w obrębie obiektu
-     * @param x  wsp. x
-     * @param y  wsp. y
-     * @return true jeśli obszar elementu zawiera dany punkt
-     */
+    }
+
+    //czy wybrane współrzedne są w obrębie obiektu
     public boolean containsPoint(int x, int y){
      
         if(x>=currX+50 && x<currX+width+50 ){
@@ -151,12 +115,8 @@ public class FlyingElements {
         
         return false;
     }
-
     
-    /**
-     * Funkcja odtwarzania dźwięku z pliku
-     * @param f - obiekt klasy File reprezentujący ścieżkę do pliku MP3
-     */
+    //odtwarzaj dźwięk
     public static synchronized void playSound(final File f) {
         new Thread(new Runnable() {
           public void run() {
@@ -170,7 +130,5 @@ public class FlyingElements {
             }
           }
         }).start();
-    }//playSound()
-
-    
+    }
 }

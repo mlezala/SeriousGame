@@ -8,7 +8,6 @@ public class SeriousGame {
         int gameWidth=1024;
         int gameHeight=768;
         
-        
         //pobierz rozmiar ekranu
         int screenWidth=Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight=Toolkit.getDefaultToolkit().getScreenSize().height;

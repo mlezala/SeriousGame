@@ -6,18 +6,16 @@ public class Flasks {
     /** Kolor kolby */
     public int color;    
     /** Ikona obiektu - kolby*/
-    public Image icon;  
-    
+    public Image icon;      
     //pierwiastki 
-   public Element elem1;
-   public Element elem2;
-    
-    
-    
+    public Element elem1;
+    public Element elem2;
+     
     public Flasks(Image[] images){
+        //losowanie koloru kolby 
         color=(int)Math.round(Math.random()*(images.length-1));
         icon=images[color]; 
-        
+        //stwierdzenie, które pierwiastki powinny być łapane do danej kolby
         switch(color) {
                 case 0: 
                 elem1 = new Element(0);
@@ -47,8 +45,6 @@ public class Flasks {
                 elem1 = new Element(0);
                 elem2 = new Element(3);
                 break;
-        }
-       
-        
+        }        
     }
 }
