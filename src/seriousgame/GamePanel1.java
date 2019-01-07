@@ -93,7 +93,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
                     GPars.levelTime=(stopTime-GPars.startTime)/1000.0;
                     GPars.levelPause=true;
                 }
-                g.setColor(Color.BLUE);
+                g.setColor(Color.GREEN);
                 g.drawString("GRATULACJE!",370,250);
                 g.drawString("PREJDŹ DO KOLEJNEGO POZIOMU.",200,350);
                 repaint();
@@ -109,9 +109,11 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
                     GPars.levelTime=(stopTime-GPars.startTime)/1000.0;
                     GPars.levelPause=true;
                 }
-                g.setColor(Color.BLUE);
-                g.drawString("STRACIŁEŚ WSZYSTKIE ŻYCIA!",370,250);
-                g.drawString("MUSISZ POĆWICZYĆ",200,350);
+                g.setColor(Color.RED);
+                g.drawString("PRZEGRANA!",380,250);
+                g.drawString("WZGLĄDA NA TO, ŻE MUSISZ POĆWICZYĆ.",150,350);
+                g.drawString("PRZEJDŹ DO MENU W CELU ZAKOŃCZENIA",150,450);
+                g.drawString("LUB ROZPOCZĘCIA NOWEJ GRY.",230,550);
                 repaint();
                 requestFocus();                                             
                 //DecimalFormat df = new DecimalFormat("#.##");
@@ -141,7 +143,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
 //            if(!fElement[i].grasp)
 //                g.drawImage(fElement[i].icon,fElement[i].currX+50,fElement[i].currY+80,(int)(fElement[i].icon.getWidth(null)), (int)(fElement[i].icon.getHeight(null)),null);
 //        
-     //isCaught((int) x+80, 510);
+    
      
      addMouseListener(new MouseAdapter(){
             @Override
@@ -158,7 +160,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
    
           }//koniec mouseClicked()
       });
-     czyzlapanypraowdilowy((int) x+80, 510);
+     isGoodCaught((int) x+80, 510);
     }
     
     
@@ -252,26 +254,12 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
       }
       
       
-      public void isCaught(int x, int y)
-      {
-          
-                for(int i=0;i<fElement.length;i++){
-                 
-                      if(fElement[i].containsPoint(x,y)){
-                          if(!fElement[i].grasp){
-                              fElement[i].setGrasp();
-                              gStatus.points++;
-                          }
-                      }
-                  }
-      }
-      
-      
+    
       
 
     
       //flask.color== 0 - jaka kolba
-      public void czyzlapanypraowdilowy(int x, int y)
+      public void isGoodCaught(int x, int y)
       {
           for(int i=0;i<fElement.length;i++){
                       //tlenek wapnia 
