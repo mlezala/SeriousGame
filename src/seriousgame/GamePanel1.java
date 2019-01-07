@@ -22,6 +22,8 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
     public Font menuFont;
    /** Tablica obiektów pierwszego planu - pierwiastki*/ 
     private FlyingElements [] fElement;
+    /** Obiekt pierwszego planu kolba*/ 
+    private Flasks flask;
      /** Liczba obiektów w linii*/
     public int objectsInLine;
     /** Przesunięcie pomiędzy liniami z obiektami*/
@@ -53,7 +55,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         objectsInLine=4;
         shiftBL=768/(GPars.noOfObjects/objectsInLine);
         fElement=new FlyingElements[GPars.noOfObjects];
-        
+        flask=new Flasks(GPars.flasks);
         restartGame();
         
         
@@ -72,30 +74,82 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         g.setColor(Color.white);
         //Ustaw czcionki do wypełnienia paska Menu
         g.setFont(menuFont);
-        g.drawString("POZIOM:",1024-700, 768-720);
+        g.drawString("POZIOM:"+gStatus.level,1024-700, 768-720);
         //g.drawString(""+,1024-540, 768-720);
-        g.drawString("PUNKTY:",1024-450, 768-720);
+        g.drawString("PUNKTY:"+gStatus.points,1024-450, 768-720);
         //narysuj ikonę z logo
         g.drawImage(GPars.logoImage,1024-1000,768-760,null);
         //narysuj kolbe  
-        g.drawImage(GPars.kolba, (int)x, (int)y, null);
-     
-     
+       // g.drawImage(GPars.kolba, (int)x, (int)y, null);
+            if(gStatus.points>=2){
+                if(!GPars.levelPause){
+                    long stopTime = System.currentTimeMillis();
+                    GPars.levelTime=(stopTime-GPars.startTime)/1000.0;
+                    GPars.levelPause=true;
+                }
+                g.setColor(Color.BLUE);
+                g.drawString("GRATULACJE!",370,250);
+                g.drawString("PREJDŹ DO KOLEJNEGO POZIOMU.",200,350);
+                repaint();
+                requestFocus();
+               
+               
+                
+                //DecimalFormat df = new DecimalFormat("#.##");
+                //g.drawString("WYGRANA:"+df.format(GPars.levelTime)+"s",150, 976/2);
+                //g.setColor(Color.white);
+                //g.setFont(menuFont);
+            }
+        //Na tle obiektu pierwszego planu
+        for(int i=0;i< 6;i++){
+            if(gStatus.points<2)
+            g.drawImage(flask.icon, (int)x, (int)y, null);
+          
+           
+        }
+        
+        
+         //Na tle obiektu pierwszego planu
         for(int i=0;i<fElement.length;i++){
+            if(gStatus.points<2){
             fElement[i].calculatePathPos(GPars.MoveMODE);
             if(!fElement[i].grasp)
-                g.drawImage(fElement[i].icon,fElement[i].currX+50,fElement[i].currY+80,(int)(fElement[i].icon.getWidth(null) ), (int)(fElement[i].icon.getHeight(null)),null);
-        }
-
+                g.drawImage(fElement[i].icon,fElement[i].currX+50,fElement[i].currY+80,(int)(fElement[i].icon.getWidth(null)), (int)(fElement[i].icon.getHeight(null)),null);
+        }}
+//        for(int i=0;i<fElement.length;i++){
+//            if(gStatus.points<2){
+//            fElement[i].calculatePathPos(GPars.MoveMODE);
+//            if(!fElement[i].grasp)
+//                g.drawImage(fElement[i].icon,fElement[i].currX+50,fElement[i].currY+80,(int)(fElement[i].icon.getWidth(null)), (int)(fElement[i].icon.getHeight(null)),null);
+//        
+     //isCaught((int) x+80, 510);
+     
+     addMouseListener(new MouseAdapter(){
+            @Override
+          public void mouseClicked(MouseEvent me){
+             
+              //czy wybrano rozpoczęcie nowego poziomu lub nowej gry
+              if(me.getX()>200 && me.getX()<810 && me.getY()>310 && me.getY()<350 && gStatus.points>=2){
+                  //Nowa gra
+                  
+                 restartGame(); 
+                 gStatus.level++;
+              }
+            
+   
+          }//koniec mouseClicked()
+      });
+     czyzlapanypraowdilowy((int) x+80, 510);
     }
     
     
     @Override
     public void actionPerformed(ActionEvent e){
         repaint();
+        requestFocus();
         x += velx;
         y += vely;
-        
+       
         //blokada na wielkosc ekranu
         if(x<=0){
             x = 0;
@@ -153,6 +207,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
           }*/
           if(code == KeyEvent.VK_LEFT){
               left();
+              
           }
           if(code == KeyEvent.VK_RIGHT){
               right();
@@ -178,6 +233,50 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
       }
       
       
+      public void isCaught(int x, int y)
+      {
+          
+                for(int i=0;i<fElement.length;i++){
+                 
+                      if(fElement[i].containsPoint(x,y)){
+                          if(!fElement[i].grasp){
+                              fElement[i].setGrasp();
+                              gStatus.points++;
+                          }
+                      }
+                  }
+      }
+      
+      
+      
+
+    
+      //flask.color== 0 - jaka kolba
+      public void czyzlapanypraowdilowy(int x, int y)
+      {
+          for(int i=0;i<fElement.length;i++){
+                      //tlenek wapnia 
+                      if(fElement[i].containsPoint(x,y)){                      
+                          if(!fElement[i].grasp && (fElement[i].color == flask.elem1.getColor())){
+                              if(flask.elem1.grasped == false){
+                              flask.elem1.setGrasped();  
+                              gStatus.points++;            
+                              }                                              
+                          }
+                          if(!fElement[i].grasp && (fElement[i].color == flask.elem2.getColor())){
+                              if(flask.elem2.grasped == false){
+                              flask.elem2.setGrasped();                         
+                              gStatus.points++;                        
+                              }                             
+                          }
+                          if(!fElement[i].grasp){
+                              fElement[i].setGrasp();
+                           
+                          }
+                      }
+                  }
+      }
+      
       public void restartGame(){
         gStatus.resetPoints();
         GPars.startTime=System.currentTimeMillis();
@@ -189,7 +288,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
          
             fElement[i]=new FlyingElements((((inLine%objectsInLine)+1)*offset)-GPars.elements[(i%GPars.elements.length)].getWidth(null),0,GPars.elements);
             fElement[i].setScreenSize(1024, 768);
-
+            flask = new Flasks (GPars.flasks);
             if(inLine>=objectsInLine){
                 yLine++;
                 inLine%=objectsInLine;
