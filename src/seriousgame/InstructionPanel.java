@@ -28,7 +28,7 @@ public class InstructionPanel extends JPanel{
         GPars.loadInitialImages();
         setLayout(null);
         
-        instruction = new JTextArea("Gra ma na celu pomoc w przyswojeniu podstawowych nazw oraz składu\nzwiązków chemicznych");
+        instruction = new JTextArea("Gra ma na celu pomoc w przyswojeniu podstawowych nazw oraz składu związków chemicznych");
         instruction.setBounds(170,100,700,300);
         instruction.setFont(new Font("Comis Sans", Font.BOLD, 18));
         instruction.setForeground(new Color(63,72, 204));

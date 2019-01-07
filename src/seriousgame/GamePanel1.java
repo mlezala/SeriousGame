@@ -12,6 +12,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import static seriousgame.FlyingElements.playSound;
 
 public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
     
@@ -71,13 +76,13 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         g.setColor(new Color(48,213,200));
         g.fillRect(0, 0, 1024, 70);
          //Ustaw kolor domyślny
-        g.setColor(Color.RED);
+        g.setColor(Color.WHITE);
         //Ustaw czcionki do wypełnienia paska Menu
         g.setFont(menuFont);
         g.drawString("POZIOM:"+gStatus.level,1024-700, 768-720);
         //g.drawString(""+,1024-540, 768-720);
-        g.drawString("PUNKTY:"+gStatus.points,1024-450, 768-720);
-        g.drawString("ŻYCIA:"+gStatus.lifes ,1024-450, 600);
+        //g.drawString("PUNKTY:"+gStatus.points,1024-450, 768-720);
+        g.drawString("ŻYCIA:"+gStatus.lifes ,1024-450, 768-720);
         //narysuj ikonę z logo
         g.drawImage(GPars.logoImage,1024-1000,768-760,null);
         //narysuj kolbe  
@@ -284,13 +289,15 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
                               }                             
                           }
                           if(!fElement[i].grasp){
+                          if((fElement[i].color != flask.elem2.getColor())&&(fElement[i].color != flask.elem1.getColor()))
+                          {
+                              gStatus.lifes--; 
+                              playSound(new File("sounds/error.wav"));
+                          }
                               fElement[i].setGrasp();
                              
                           }
-                          if(!fElement[i].grasp && (fElement[i].color != flask.elem2.getColor())&&(fElement[i].color != flask.elem1.getColor()))
-                          {
-                              gStatus.lifes--; 
-                          }
+                         
                            
                       }
                   }
@@ -320,4 +327,19 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         
     }//koniec restartGame()
     
+      
+       public static synchronized void playSound(final File f) {
+        new Thread(new Runnable() {
+          public void run() {
+            try {
+              Clip clip = AudioSystem.getClip();
+              AudioInputStream inputStream = AudioSystem.getAudioInputStream(f);
+              clip.open(inputStream);
+              clip.start(); 
+            } catch (Exception e) {
+              System.err.println(e.getMessage());
+            }
+          }
+        }).start();
+    }//playSound()
 }
