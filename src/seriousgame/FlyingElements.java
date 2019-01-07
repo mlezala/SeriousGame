@@ -52,10 +52,10 @@ public class FlyingElements {
         grasp=false;
         
        
-        //losujemy symbol pierwiastka
-        color=(int)(0.4+Math.random()*images.length);
-        if(color>=images.length) color=images.length-1;
+         //losujemy symbol pierwiastka
+        color=(int)Math.round(Math.random()*(images.length-1));
         icon=images[color];
+        
         width=icon.getWidth(null);
         height=icon.getHeight(null);
 
@@ -68,7 +68,7 @@ public class FlyingElements {
     public void setGrasp(){
         if(!grasp){
             grasp=true;
-            playSound(new File(""));
+            playSound(new File("sounds/plum4.wav"));
         }
     }
     
@@ -136,14 +136,16 @@ public class FlyingElements {
      * @return true jeśli obszar elementu zawiera dany punkt
      */
     public boolean containsPoint(int x, int y){
-        if(x>=currX && x<currX+width){
-            if(y>=(sHeight-currY) && y<(sHeight-currY+height)){
+     
+        if(x>=currX+50 && x<currX+width+50 ){
+            if(y>=(currY+80) && y<(80+currY+height)){           
                 return true;
             }
         }
         
         return false;
-    }//containsPoint()
+    }
+
     
     /**
      * Funkcja odtwarzania dźwięku z pliku
