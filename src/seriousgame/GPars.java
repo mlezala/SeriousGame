@@ -80,7 +80,7 @@ public class GPars {
 
 
         elements= new Image[5];
-        elements[0]=loadImage("images/sod.png");
+        elements[0]=loadImage("images/jod.png");
         elements[1]=loadImage("images/potas.png");
         elements[2]=loadImage("images/wapn.png");
         elements[3]=loadImage("images/magnez.png");
