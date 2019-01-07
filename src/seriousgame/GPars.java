@@ -15,8 +15,8 @@ public class GPars {
      /**  Dopuszczalny czas gry   */
     public static long GAME_TIME=Long.MAX_VALUE;
     /**  Liczba poziomów gry   */
-    public final static long NO_LEVELS=2;
-    /**  Obraz tła   */
+    public final static long NO_LEVELS=6;
+    /**  Obraz t³a */
     public static Image bgImage;
     /**  Obraz ikony Menu   */
     public static Image menuImage;
@@ -26,25 +26,25 @@ public class GPars {
     public static Image logoImage;
     /** Obraz ikony kursora - tarcza*/
     public static Image cursorImage;
-    /**  Tablica obiektów pierwszego planu   */
+    /**  Tablica obiektów pierwszego planu - pierwiastki*/
     public static Image[] elements;
-    /**  Zmienna stanu określającam czy jest przerwa w grze   */
+    /**  Zmienna stanu okreœlaj¹cam czy jest przerwa w grze*/
     public static boolean pause=false;
-    /** Zmienna stanu określająca czy wybrano menu*/
+    /** Zmienna stanu okreœlaj¹ca czy wybrano menu*/
     public static boolean levelPause=false;
-    /** Zmienna pomocnicza określająca początkowy czas gry */
+    /** Zmienna pomocnicza okreœlaj¹ca pocz¹tkowy czas gry */
     public static long startTime;
-    /** Zmienna pomocnicza określająca czas ukończenia aktualnego poziomu */
+    /** Zmienna pomocnicza okreœlaj¹ca czas ukoñczenia aktualnego poziomu */
     public static double levelTime;
-    /** Zmienna pomocnicza określająca aktualny poziom gry */
+    /** Zmienna pomocnicza okreœlaj¹ca aktualny poziom gry */
     public static int MoveMODE=1;
-    /** Zmienna pomocnicza określająca status ukończenia gry */
+    /** Zmienna pomocnicza okreœlaj¹ca status ukoñczenia gry */
     public static boolean end=false;
-    /** Zmienna pomocnicza określająca maksymalną liczę obiektów pierwszego planu */
-    public static int noOfObjects=12;
-    /** Szerokość pola graficznego gry */
+    /** Zmienna pomocnicza okreœlaj¹ca maksymaln¹ liczê obiektów pierwszego planu */
+    public static int noOfObjects=16;
+    /** Szerokoœæ pola graficznego gry */
     public static int gWidth=1024;
-    /** Wysokość pola graficznego gry */
+    /** Wysokoœæ pola graficznego gry */
     public static int gHeight=768;
     /**Obraz ikony Koniec gry! */
     public static Image theEndImage;
@@ -56,14 +56,16 @@ public class GPars {
     public static Image menuBackground;
     public static Image instructionBackground;
      public static Image kolba;
+    /**  Tablica kolb   */
+    public static Image[] flasks;
  
     /**
-     * Metoda ładowania początkowych zasobów gry
+     * Metoda ³adowania pocz¹tkowych zasobów gry
      */
     public static void loadInitialImages() {
         
         kolba = loadImage("images/kolba.png");
-        instructionBackground = loadImage("images/tło.jpg");
+        instructionBackground = loadImage("images/t³o.jpg");
         menuBackground = loadImage("images/background0.png");
         menuLogo = new ImageIcon ("images/MENU.png");
         bgImage = loadImage("images/tloo.png");
@@ -79,14 +81,22 @@ public class GPars {
 
         elements= new Image[5];
         elements[0]=loadImage("images/sod.png");
-        elements[1]=loadImage("images/sod.png");
-        elements[2]=loadImage("images/sod.png");
-        elements[3]=loadImage("images/sod.png");
-        elements[4]=loadImage("images/sod.png");
+        elements[1]=loadImage("images/potas.png");
+        elements[2]=loadImage("images/wapn.png");
+        elements[3]=loadImage("images/magnez.png");
+        elements[4]=loadImage("images/tlen.png");
+        
+        flasks= new Image[6];
+        flasks[0]=loadImage("images/kolba1.png");
+        flasks[1]=loadImage("images/kolba2.png");
+        flasks[2]=loadImage("images/kolba3.png");
+        flasks[3]=loadImage("images/kolba4.png");
+        flasks[4]=loadImage("images/kolba5.png");
+        flasks[5]=loadImage("images/kolba6.png");
     }//koniec loadInitialImages()
     
     /**
-     * Metoda pobierania obiektu klasy Image na podstawie ścieżki
+     * Metoda pobierania obiektu klasy Image na podstawie œcie¿ki
      * dostepu podanej jako String
      */
     public static Image loadImage(String fileName) {
