@@ -79,20 +79,28 @@ public class GPars {
 
 
 
-        elements= new Image[5];
-        elements[0]=loadImage("images/jod.png");
-        elements[1]=loadImage("images/potas.png");
-        elements[2]=loadImage("images/wapn.png");
-        elements[3]=loadImage("images/magnez.png");
-        elements[4]=loadImage("images/tlen.png");
+        elements= new Image[11];
+        elements[0]=loadImage("images/wapn.png");
+        elements[1]=loadImage("images/tlen.png");
+        elements[2]=loadImage("images/magnez.png");
+        elements[3]=loadImage("images/siarka.png");
+        elements[4]=loadImage("images/brom.png");
+        elements[5]=loadImage("images/jod.png");
+        elements[6]=loadImage("images/potas.png");
+        elements[7]=loadImage("images/chlor.png");
+        elements[8]=loadImage("images/cynk.png");
+        elements[9]=loadImage("images/lit.png");
+        elements[10]=loadImage("images/fluor.png");
         
-        flasks= new Image[6];
-        flasks[0]=loadImage("images/kolba1.png");
-        flasks[1]=loadImage("images/kolba2.png");
-        flasks[2]=loadImage("images/kolba3.png");
-        flasks[3]=loadImage("images/kolba4.png");
-        flasks[4]=loadImage("images/kolba5.png");
-        flasks[5]=loadImage("images/kolba6.png");
+        
+        flasks= new Image[7];
+        flasks[0]=loadImage("images/CaO.png");
+        flasks[1]=loadImage("images/MgS.png");
+        flasks[2]=loadImage("images/BrI.png");
+        flasks[3]=loadImage("images/KCl.png");
+        flasks[4]=loadImage("images/Zn0.png");
+        flasks[5]=loadImage("images/LiF.png");
+        flasks[5]=loadImage("images/CaS.png");
     }//koniec loadInitialImages()
     
     /**
