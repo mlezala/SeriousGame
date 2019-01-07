@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 public class Window extends JFrame{
     
     MenuPanel menu = new MenuPanel();
+    MenuPanelDuringGame menuDuringGame = new MenuPanelDuringGame();
     InstructionPanel instruction = new InstructionPanel();
     GamePanel1 newGame = new GamePanel1();
     JPanel cardPanel;
@@ -41,6 +42,7 @@ public class Window extends JFrame{
     cardPanel = new JPanel(new CardLayout());
     getContentPane().add(cardPanel); 
     cardPanel.add(menu, "MENU");
+    cardPanel.add(menuDuringGame, "MENUDURINGGAME");
     cardPanel.add(instruction, "INSTRUCTION");
     cardPanel.add(newGame, "NEWGAME");
    
@@ -63,12 +65,26 @@ public class Window extends JFrame{
             
         }
     });
+     
+     menuDuringGame.instruction.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+            cl.show(cardPanel, "INSTRUCTION");          
+        }
+    });
       
      menu.endGame.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         System.exit(0);
             
+        }
+    });
+     
+     menuDuringGame.endGame.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        System.exit(0);            
         }
     });
         
@@ -91,8 +107,25 @@ public class Window extends JFrame{
      menu.newGame.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
+        newGame.restartGame();
         cl.show(cardPanel, "NEWGAME");
             
+        }
+    });
+     
+     
+      menuDuringGame.newGame.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+       newGame.restartGame();
+        cl.show(cardPanel, "NEWGAME");            
+        }
+    });
+       
+     menuDuringGame.continueGame.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "NEWGAME");           
         }
     });
         
@@ -100,7 +133,7 @@ public class Window extends JFrame{
      newGame.menu.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
-        cl.show(cardPanel, "MENU");
+        cl.show(cardPanel, "MENUDURINGGAME");
             
         }
     });

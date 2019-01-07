@@ -178,7 +178,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
       }
       
       
-      private void restartGame(){
+      public void restartGame(){
         gStatus.resetPoints();
         GPars.startTime=System.currentTimeMillis();
         GPars.pause=false;
