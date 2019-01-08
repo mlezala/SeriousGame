@@ -10,11 +10,18 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
+/**
+ * klasa odpowiedzialna za panel instrukcji
+ * @author Magda
+ */
 public class InstructionPanel extends JPanel{
+    /** Przycisk instrukcja*/
     JTextArea instruction; 
+    /** Przycisk menu*/
     JButton menu;
+    /** Przycisk koniec gry*/
     JButton endGame;
+   
      public InstructionPanel(){
         GPars.loadInitialImages();
         setLayout(null);
@@ -44,7 +51,10 @@ public class InstructionPanel extends JPanel{
         add(menu);
         add(endGame);
     }
-
+     /**
+      * 
+      * @param gs 
+      */
     protected void paintComponent(Graphics gs){
         Graphics2D g=(Graphics2D)gs;
         //Ustaw tryb lepszej jakości grafiki

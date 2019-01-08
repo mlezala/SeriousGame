@@ -1,21 +1,32 @@
 
 package seriousgame;
-
+/**
+ * @author Magda
+ */
 public class Element {
     public int color;
     public boolean grasped;
-   
-public Element (int color) {
-   this.color = color;
-   grasped = false; 
-}
+
+    /**
+    * @param color - kolor pierwiastka 
+    */
+    public Element (int color) {
+        this.color = color;
+        grasped = false; 
+    }
     
- public void setGrasped() {
-    grasped = true;
-}   
- 
-public int getColor() {
-    return color; 
-}
-   
+    /**
+    * Pierwiastek złapany - ustaw stan 
+    */   
+    public void setGrasped() {
+        grasped = true;
+    }  
+    
+    /**
+    * Pobierz kolor pierwiastka 
+    * @return 
+    */
+    public int getColor() {
+        return color; 
+    }  
 }

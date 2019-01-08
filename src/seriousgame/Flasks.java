@@ -2,12 +2,17 @@
 package seriousgame;
 import java.awt.Image;
 
+/**
+ * Klasa odpowiedzialna za losowanie koloru kolby
+ * oraz stwierdzenie, które pierwiastki powinny zostać do niej złapane
+ * @author Magda
+ */
 public class Flasks {
     /** Kolor kolby */
     public int color;    
     /** Ikona obiektu - kolby*/
     public Image icon;      
-    //pierwiastki 
+     /** Pierwiastki*/ 
     public Element elem1;
     public Element elem2;
      

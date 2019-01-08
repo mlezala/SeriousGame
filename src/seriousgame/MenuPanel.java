@@ -11,12 +11,19 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * klasa odpowiedzialna za panel menu
+ * @author Magda
+ */
 public class MenuPanel extends JPanel{
     
+     /** Przycisk nowa gra*/  
      JButton newGame;
+     /** Przycisk koniec gry*/
      JButton endGame;
+     /** Przycisk instrukcja*/
      JButton instruction;
+     
     public MenuPanel(){
         GPars.loadInitialImages();
         setLayout(null);

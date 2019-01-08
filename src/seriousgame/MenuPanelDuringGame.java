@@ -10,12 +10,19 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * klasa odpowiedzialna za panel instrukcji
+ * @author Magda
+ */
 public class MenuPanelDuringGame extends JPanel{
     
+    /** Przycisk kontynuuj*/
     JButton continueGame;
+    /** Przycisk nowa gra*/
     JButton newGame;
+    /** Przycisk koniec gry*/
     JButton endGame;
+    /** Przycisk instrukcja*/
     JButton instruction;
             
     public MenuPanelDuringGame(){

@@ -7,7 +7,10 @@ import java.util.Random;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-
+/**
+ * 
+ * @author Magda
+ */
 public class FlyingElements {
     /** Początkowa współrzędna x obiektu */
     public int x;
@@ -21,7 +24,7 @@ public class FlyingElements {
     public int width;
     /** Wysokość ikony obiektu */
     public int height;    
-    /** Krok przesunięcia obiektu z dołu do góry */
+    /** Krok przesunięcia obiektu z góry do dołu */
     public int dy;
     /** Kolor pierwisatka */
     public int color;
@@ -46,8 +49,7 @@ public class FlyingElements {
         sWidth=1024;
         sHeight=768;
         grasp=false;
-        
-       
+             
         //losuj symbol pierwiastka
         color=(int)Math.round(Math.random()*(images.length-1));
         icon=images[color];
@@ -56,67 +58,93 @@ public class FlyingElements {
         height=icon.getHeight(null); 
     }
     
-    //pierwiastek złapany - ustaw stan i odtwórz dźwięk
+    /**
+     *pierwiastek złapany - ustaw stan i odtwórz dźwięk
+     */
     public void setGrasp(){
         if(!grasp){
             grasp=true;
-            playSound(new File("sounds/plum4.wav"));
+            playSound(new File("sounds/plum.wav"));
         }
     }
     
-    //ustaw pozycję pierwiastka
+    /**
+     * ustaw pozycję pierwiastka
+     * @param cX
+     * @param cY 
+     */
     public void setPosition(int cX, int cY){
         currX=cX;
         currY=cY;
     }
     
-    //ustaw rozmiar pola graficznego
+    /**
+     * ustaw rozmiar pola graficznego
+     * @param gWidth - szerokość 
+     * @param gHeight - wysokość
+     */
     public void setScreenSize(int gWidth, int gHeight){
         sWidth=gWidth;
         sHeight=gHeight;
     }
     
-    //ustaw pozycję Y
+    /**
+     * ustaw pozycję Y
+     * @param cY 
+     */
     public void setYPos(int cY){
         currY=cY;
-    }//setYPos()
+    }
     
   
-    //pobierz pozycję pierwiastka
+    /**
+     * pobierz pozycję pierwiastka
+     * @return - zwróć aktualną pozycję pierwiastka
+     */
     public Point getPosition(){
         return new Point(currX,currY);
     }
  
-    //oblicz położenie pierwiastka
+    /**
+     * oblicz położenie pierwiastka
+     * @param mode 
+     */
     public void calculatePathPos(int mode){
         int tmpX=0;
         switch(mode){
-            case 1: //liniowo
+            case 1:
                    currY=currY+dy;
                    if(currY>sHeight) { 
                        currY=0;
                    }
                    tmpX=0;
                    currX=x+tmpX;
-                    break;
+                   break;
            
             default: break;    
         }
     }
 
-    //czy wybrane współrzedne są w obrębie obiektu
+    /**
+     * czy wybrane współrzedne są w obrębie obiektu
+     * @param x - współrzędna x
+     * @param y - współrzeędna y
+     * @return 
+     */
     public boolean containsPoint(int x, int y){
      
         if(x>=currX+50 && x<currX+width+50 ){
             if(y>=(currY+80) && y<(80+currY+height)){           
                 return true;
             }
-        }
-        
+        } 
         return false;
     }
     
-    //odtwarzaj dźwięk
+    /**
+     * odtwarzaj dźwięk
+     * @param f 
+     */
     public static synchronized void playSound(final File f) {
         new Thread(new Runnable() {
           public void run() {

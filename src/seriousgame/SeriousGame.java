@@ -1,7 +1,10 @@
 
 package seriousgame;
 import java.awt.Toolkit;
-
+/**
+ * 
+ * @author Magda
+ */
 public class SeriousGame {
 
     public static void main(String[] args) {

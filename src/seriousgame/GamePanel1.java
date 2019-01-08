@@ -13,48 +13,51 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
 import java.io.File;
+import java.text.DecimalFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import static seriousgame.FlyingElements.playSound;
-
+/**
+ * klasa zawierająca całą logikę gry
+ * @author Magda
+ */
 public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
     
     Timer t = new Timer(5, this);
-    double x=380, y=510, velx = 0, vely =0;
+    /** Wspólrzędne kolby i jej przesunięcie*/
+    double x=380, y=540, velx = 0, vely =0;
     public GameStatus gStatus;
     /** Czcionki stosowane w pasku Menu*/
     public Font menuFont;
-   /** Tablica obiektów pierwszego planu - pierwiastki*/ 
+   /** Tablica pierwiastków*/ 
     private FlyingElements [] fElement;
-    /** Obiekt pierwszego planu kolba*/ 
+    /** Obiekt - kolba*/ 
     private Flasks flask;
-     /** Liczba obiektów w linii*/
+    /** Liczba pierwiastków w linii*/
     public int objectsInLine;
-    /** Przesunięcie pomiędzy liniami z obiektami*/
+    /** Przesunięcie pomiędzy liniami z pierwiastkami*/
     public int shiftBL;
-  
+     /** Przycisk menu*/
     JButton menu;
     
     public GamePanel1(){
          
         gStatus=new GameStatus();
-        gStatus.reset();
-        
+        //ustawienie początkowych parametrów gry
+        gStatus.reset();        
         t.start();
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
-        
         GPars.loadInitialImages();
         setLayout(null);
         menuFont=new Font("Dialog",Font.BOLD,36);
-        
+        //dodaj i usraw przycisk menu
         menu = new JButton();
         menu.setIcon(GPars.menuLogo);
         menu.setBounds(870,10,132,60);
         add(menu);
-        
         objectsInLine=1;
         shiftBL=768/(GPars.noOfObjects/3);
         fElement=new FlyingElements[GPars.noOfObjects];
@@ -62,7 +65,10 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         
         restartGame();
     }
-    
+    /**
+     * funkcja odpowiedzialna za wygląd głownego okna gry
+     * @param gs 
+     */
     public void paintComponent(Graphics gs){
         Graphics2D g=(Graphics2D)gs;
         //Ustaw tryb lepszej jakości grafiki
@@ -89,13 +95,12 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
                 }
                 g.setColor(Color.GREEN);
                 g.drawString("GRATULACJE!",370,250);
-                g.drawString("PREJDŹ DO KOLEJNEGO POZIOMU.",200,350);
+                DecimalFormat df = new DecimalFormat("#.##");
+                g.drawString("TWÓJ CZAS WYNOSI:"+df.format(GPars.levelTime)+"s",300, 350);
+                g.drawString("PREJDŹ DO KOLEJNEGO POZIOMU.",200,450);
                 repaint();
                 requestFocus();                                             
-                //DecimalFormat df = new DecimalFormat("#.##");
-                //g.drawString("WYGRANA:"+df.format(GPars.levelTime)+"s",150, 976/2);
-                //g.setColor(Color.white);
-                //g.setFont(menuFont);
+                
             }
             if(gStatus.lifes<=0){
                 if(!GPars.levelPause){
@@ -126,13 +131,12 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
                 g.drawImage(fElement[i].icon,fElement[i].currX+50,fElement[i].currY+80,(int)(fElement[i].icon.getWidth(null)), (int)(fElement[i].icon.getHeight(null)),null);
         }}
 
-     //dodanie obłsługi myszki
-     addMouseListener(new MouseAdapter(){
+         //dodanie obłsługi myszki
+        addMouseListener(new MouseAdapter(){
             @Override
-          public void mouseClicked(MouseEvent me){
-             
+            public void mouseClicked(MouseEvent me){
               //przejście do następnego poziomu
-              if(me.getX()>200 && me.getX()<810 && me.getY()>310 && me.getY()<350 && gStatus.points>=2){
+              if(me.getX()>200 && me.getX()<810 && me.getY()>310 && me.getY()<450 && gStatus.points>=2){
                  restartGame(); 
                  gStatus.level++;
               }
@@ -140,10 +144,13 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
       });
      
      //sprawdź czy złapane elementy są prawidłowe i reaguj odpowiednio
-     isGoodCaught((int) x+80, 510);
+     isGoodCaught((int) x+80, 540);
     }
     
-    //obluga klawiatury - strzełki PRAWO/LEWO
+    /**
+     * obluga klawiatury - strzełki PRAWO/LEWO
+     * @param e 
+     */
     @Override
     public void actionPerformed(ActionEvent e){
         repaint();
@@ -151,7 +158,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         x += velx;
         y += vely;
        
-        //blokada na wielkosc ekranu
+        //blokada poruszania kolbą ze względu na wielkość ekranu
         if(x<=0){
             x = 0;
         }
@@ -226,7 +233,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
                               gStatus.lifes--; 
                               FlyingElements.playSound(new File("sounds/error.wav"));
                           }
-                              //wywołaj znikanie pierwiasrka po złapaniu
+                              //wywołaj znikanie pierwiastka po złapaniu
                               fElement[i].setGrasp();
                           }
                       }
@@ -243,7 +250,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
         int yLine=0;
         for(int i=0; i<GPars.noOfObjects;i++){
          
-            fElement[i]=new FlyingElements((((inLine%objectsInLine)+1)*offset)-GPars.elements[(i%GPars.elements.length)].getWidth(null),0 ,GPars.elements);
+            fElement[i]=new FlyingElements((((inLine%objectsInLine)+1)*offset)-GPars.elements[(i%GPars.elements.length)].getWidth(null),0,GPars.elements);
             fElement[i].setScreenSize(1024, 768);
             flask = new Flasks (GPars.flasks);
             if(inLine>=objectsInLine){

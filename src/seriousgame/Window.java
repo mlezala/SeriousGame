@@ -10,7 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+ * klasa odpowiedzialna za pokazywanie odpowiedniego okna w zależności od interakcji użytkownika
+ * @author Magda
+ */
 public class Window extends JFrame{
     
     MenuPanel menu = new MenuPanel();
@@ -108,8 +111,7 @@ public class Window extends JFrame{
             
         }
     });
-     
-     
+          
       menuDuringGame.newGame.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
@@ -124,8 +126,7 @@ public class Window extends JFrame{
         cl.show(cardPanel, "NEWGAME");           
         }
     });
-        
-        
+                
      newGame.menu.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
@@ -146,13 +147,9 @@ public class Window extends JFrame{
         //pobierz liczbę milisekund od daty referencyjnej (w ms) 
         GPars.startTime = System.currentTimeMillis();
         long currTime = GPars.startTime;
-
         while (currTime - GPars.startTime < GPars.GAME_TIME) {
-          long elapsedTime = System.currentTimeMillis() - currTime;
-          //licz czas gry - może się przydać w ograniczeniach czasowych 
-          //w tej demonstracji nie wykorzystane
-          currTime += elapsedTime;         
-          //odrysuj kolejny ekran gry (nowe pozycje obiektów - symulacja ruchu)
+          long elapsedTime = System.currentTimeMillis() - currTime;       
+          //odrysuj kolejny ekran gry
           repaint();         
           // przerwa w czasie
           try {

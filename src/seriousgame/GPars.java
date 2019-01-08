@@ -5,68 +5,59 @@ import javax.swing.ImageIcon;
 
 public class GPars {
     
-    /**  Dopuszczalny czas gry   */
+    /** Dopuszczalny czas gry */
     public static long GAME_TIME=Long.MAX_VALUE;
-    /**  Liczba poziomów gry   */
+    /** Liczba poziomów gry   */
     public final static long NO_LEVELS=100;
-    /**  Obraz tla */
+    /** Obraz tla */
     public static Image bgImage;
-    /**  Obraz ikony Menu   */
+    /** Obraz ikony Menu   */
     public static Image menuImage;
-    /**  Obraz ikony Menu powrotu do gry  */
-    public static Image menuGameImage;
-    /**  Obraz ikony logo   */
+    /** Obraz ikony logo */
     public static Image logoImage;
-    /** Obraz ikony kursora - tarcza*/
+    /** Obraz ikony kursora*/
     public static Image cursorImage;
-    /**  Tablica obiektów pierwszego planu - pierwiastki*/
+    /** Tablica obiektów pierwszego planu - pierwiastki*/
     public static Image[] elements;
-    /**  Zmienna stanu okreœlaj¹cam czy jest przerwa w grze*/
+    /**  Zmienna stanu okrecam czy jest przerwa w grze*/
     public static boolean pause=false;
-    /** Zmienna stanu okreœlaj¹ca czy wybrano menu*/
+    /** Zmienna stanu określająca czy wybrano menu*/
     public static boolean levelPause=false;
-    /** Zmienna pomocnicza okreœlaj¹ca pocz¹tkowy czas gry */
+    /** Zmienna pomocnicza okręslająca początkowy czas gry */
     public static long startTime;
-    /** Zmienna pomocnicza okreœlaj¹ca czas ukoñczenia aktualnego poziomu */
+    /** Zmienna pomocnicza okręślająca czas ukończenia aktualnego poziomu */
     public static double levelTime;
-    /** Zmienna pomocnicza okreœlaj¹ca aktualny poziom gry */
+    /** Zmienna pomocnicza określająca aktualny poziom gry */
     public static int MoveMODE=1;
-    /** Zmienna pomocnicza okreœlaj¹ca status ukoñczenia gry */
+    /** Zmienna pomocnicza określająca status ukończenia gry */
     public static boolean end=false;
-    /** Zmienna pomocnicza okreœlaj¹ca maksymaln¹ liczê obiektów pierwszego planu */
+    /** Zmienna pomocnicza określająca maksymalną liczbę obiektów pierwszego planu */
     public static int noOfObjects=18;
-    /** Szerokoœæ pola graficznego gry */
+    /** Szerokość pola graficznego gry */
     public static int gWidth=1024;
-    /** Wysokoœæ pola graficznego gry */
+    /** Wysokość pola graficznego gry */
     public static int gHeight=768;
-    /**Obraz ikony Koniec gry! */
-    public static Image theEndImage;
-    /**Obraz ikony Pomoc */
-    public static Image helpImage;
-     /**Obraz ikony Nowa gra */
-    public static Image newGameImage;
+     /** Obraz ikony logo */
     public static ImageIcon menuLogo; 
+     /** Obraz tła menu */
     public static Image menuBackground;
+     /** Obraz tła instrukcji*/
     public static Image instructionBackground;
-     public static Image kolba;
     /**  Tablica kolb   */
     public static Image[] flasks;
  
     //dodawanie zasobów gry
     public static void loadInitialImages() {
         
-        kolba = loadImage("images/kolba.png");
         instructionBackground = loadImage("images/tlo.jpg");
         menuBackground = loadImage("images/background0.png");
         menuLogo = new ImageIcon ("images/MENU.png");
         bgImage = loadImage("images/tloo.png");
         menuImage=loadImage("images/MENU.png");
-        menuGameImage=loadImage("images/GRA.png");
         logoImage=loadImage("images/logo.png");
-        cursorImage=loadImage("images/elementy.png");
-        theEndImage=loadImage("images/KONIEC.png");
-        helpImage=loadImage("images/pomocMenu.png");
-        newGameImage=loadImage("images/nowaGraMenu.png");
+        cursorImage=loadImage("images/kursor1.png");
+        
+      
 
         elements= new Image[11];
         elements[0]=loadImage("images/wapn.png");
