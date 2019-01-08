@@ -31,9 +31,9 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
     /** Czcionki stosowane w pasku Menu*/
     public Font menuFont;
    /** Tablica pierwiastków*/ 
-    private FlyingElements [] fElement;
+    public FlyingElements [] fElement;
     /** Obiekt - kolba*/ 
-    private Flasks flask;
+    public Flasks flask;
     /** Liczba pierwiastków w linii*/
     public int objectsInLine;
     /** Przesunięcie pomiędzy liniami z pierwiastkami*/

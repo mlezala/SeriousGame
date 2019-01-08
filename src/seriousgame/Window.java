@@ -136,14 +136,14 @@ public class Window extends JFrame{
     });
     }    
     
-    private void initGUI(){
+    public void initGUI(){
         Toolkit tk = Toolkit.getDefaultToolkit();
         //ustaw kursor myszki w kształcie probowki
         Cursor tCursor = tk.createCustomCursor(GPars.cursorImage, new Point(10,10), "Cursor");
         setCursor(tCursor);
     }
     
-    private void animationLoop() {
+    public void animationLoop() {
         //pobierz liczbę milisekund od daty referencyjnej (w ms) 
         GPars.startTime = System.currentTimeMillis();
         long currTime = GPars.startTime;
