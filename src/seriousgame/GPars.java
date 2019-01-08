@@ -32,7 +32,7 @@ public class GPars {
     /** Zmienna pomocnicza określająca status ukończenia gry */
     public static boolean end=false;
     /** Zmienna pomocnicza określająca maksymalną liczbę obiektów pierwszego planu */
-    public static int noOfObjects=18;
+    public static int noOfObjects=19;
     /** Szerokość pola graficznego gry */
     public static int gWidth=1024;
     /** Wysokość pola graficznego gry */

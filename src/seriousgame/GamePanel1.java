@@ -110,7 +110,7 @@ public class GamePanel1 extends JPanel implements ActionListener, KeyListener{
                 }
                 g.setColor(Color.RED);
                 g.drawString("PRZEGRANA!",380,250);
-                g.drawString("WZGLĄDA NA TO, ŻE MUSISZ POĆWICZYĆ.",150,350);
+                g.drawString("WYGLĄDA NA TO, ŻE MUSISZ POĆWICZYĆ.",150,350);
                 g.drawString("PRZEJDŹ DO MENU W CELU ZAKOŃCZENIA",150,450);
                 g.drawString("LUB ROZPOCZĘCIA NOWEJ GRY.",230,550);
                 repaint();
